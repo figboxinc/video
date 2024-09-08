@@ -7,10 +7,11 @@ import {
 import "@livekit/components-styles";
 import CountdownTimer from "./CountdownTimer";
 import ConferenceRoom from "./ConferenceRoom";
+import Countdown from "./Countdown";
 
 export default function Page() {
   const [token, setToken] = useState("");
-  const [roomDuration, setRoomDuration] = useState(.5 * 60 * 1000); // 30
+  const [roomDuration, setRoomDuration] = useState(.5 * 60); // 30
   const [maxParticipants, setMaxParticipants] = useState(3); // Max number of participants allowed
   const roomRef = useRef<HTMLDivElement | null>(null);
 
@@ -57,9 +58,9 @@ export default function Page() {
       data-lk-theme="default"
       style={{ height: "100dvh" }}
       ref={roomRef}
-    >
+    ><Countdown duration={roomDuration} />
       <ConferenceRoom participantLimit={maxParticipants} />
-      <CountdownTimer duration={roomDuration} />
+     
     </LiveKitRoom>
   );
 }
