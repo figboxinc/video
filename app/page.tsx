@@ -11,14 +11,14 @@ import ConferenceRoom from "./ConferenceRoom";
 
 export default function Page() {
   const [token, setToken] = useState("");
-  const [roomDuration, setRoomDuration] = useState(30 * 60 * 1000); // 30
+  const [roomDuration, setRoomDuration] = useState(.5 * 60 * 1000); // 30
   const [maxParticipants, setMaxParticipants] = useState(4) // Max number of participants allowed
-  const iD = Math.floor(Math.random() * 100);
   const roomRef = useRef<LiveKitRoomType | null>(null);
   
   useEffect(() => { // Fetch token and automatically create room
     (async () => {
       try {
+        const iD = Math.floor(Math.random() * 100);
         const resp = await fetch(
           `/api/get-participant-token?room=room&username=${iD}`
         );
@@ -28,7 +28,7 @@ export default function Page() {
         console.error(e);
       }
     })();
-  });
+  },[]);
 
   useEffect(() => { // Delete the room once timer has run out
     if (token && roomRef.current) {
