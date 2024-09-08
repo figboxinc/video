@@ -7,7 +7,7 @@ const deleteRoom = () => {
   fetch(`/api/delete-room?room=room`);
 };
 
-const children = ({ remainingTime }) => {
+const children = ({ remainingTime }:any) => {
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
 
