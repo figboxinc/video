@@ -28,7 +28,7 @@ export default function Page() {
         console.error(e);
       }
     })();
-  }, []);
+  });
 
   useEffect(() => { // Delete the room once timer has run out
     if (token && roomRef.current) {

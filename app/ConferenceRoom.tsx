@@ -1,7 +1,7 @@
 import { VideoConference } from "@livekit/components-react";
 import { useRemoteParticipants } from "@livekit/components-react";
 
-export default function MyVideoConference(props) {
+export default function MyVideoConference(props:any) {
     const participants = useRemoteParticipants(); // Get list of remote participants
     const participantCount = participants.length;
     const maxParticipants = props.participantLimit;
