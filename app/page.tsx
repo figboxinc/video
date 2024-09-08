@@ -31,20 +31,6 @@ export default function Page() {
     })();
   }, []);
 
-  {/*useEffect(() => {
-    // Delete the room once timer has run out
-    if (token && roomRef.current) {
-      const timer = setTimeout(() => {
-        if (roomRef.current) {
-          fetch(`
-          /api/delete-room?room=room`);
-        }
-      }, roomDuration);
-
-      return () => clearTimeout(timer);
-    }
-  }, [token, roomDuration]);*/}
-
   if (token === "") {
     return <div>Getting token...</div>;
   }
