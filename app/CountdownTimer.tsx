@@ -4,12 +4,19 @@ import React, { useEffect, useState } from 'react';
 
 const CountdownTimer = ({ duration }: { duration: number }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
- 
+  const deleteRoom =() =>  {
+    console.log('deleting room')
+    fetch(
+      `/api/delete-room?room=room`,
+    );
+  }
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 0) {
           clearInterval(intervalId);
+          deleteRoom();
           return 0;
         }
         return prevTime - 1000;

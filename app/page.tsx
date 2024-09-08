@@ -11,7 +11,7 @@ import ConferenceRoom from "./ConferenceRoom";
 export default function Page() {
   const [token, setToken] = useState("");
   const [roomDuration, setRoomDuration] = useState(.5 * 60 * 1000); // 30
-  const [maxParticipants, setMaxParticipants] = useState(4); // Max number of participants allowed
+  const [maxParticipants, setMaxParticipants] = useState(3); // Max number of participants allowed
   const roomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Page() {
     })();
   }, []);
 
-  useEffect(() => {
+  {/*useEffect(() => {
     // Delete the room once timer has run out
     if (token && roomRef.current) {
       const timer = setTimeout(() => {
@@ -42,7 +42,7 @@ export default function Page() {
 
       return () => clearTimeout(timer);
     }
-  }, [token, roomDuration]);
+  }, [token, roomDuration]);*/}
 
   if (token === "") {
     return <div>Getting token...</div>;
