@@ -5,17 +5,17 @@ import {
   LiveKitRoom,
 } from "@livekit/components-react";
 import "@livekit/components-styles";
-import { Room as LiveKitRoomType } from "livekit-client";
 import CountdownTimer from "./CountdownTimer";
 import ConferenceRoom from "./ConferenceRoom";
 
 export default function Page() {
   const [token, setToken] = useState("");
-  const [roomDuration, setRoomDuration] = useState(.5 * 60 * 1000); // 30
-  const [maxParticipants, setMaxParticipants] = useState(4) // Max number of participants allowed
-  const roomRef = useRef<LiveKitRoomType | null>(null);
-  
-  useEffect(() => { // Fetch token and automatically create room
+  const [roomDuration, setRoomDuration] = useState(30 * 60 * 1000); // 30
+  const [maxParticipants, setMaxParticipants] = useState(4); // Max number of participants allowed
+  const roomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Fetch token and automatically create room
     (async () => {
       try {
         const iD = Math.floor(Math.random() * 100);
@@ -28,9 +28,10 @@ export default function Page() {
         console.error(e);
       }
     })();
-  },[]);
+  }, []);
 
-  useEffect(() => { // Delete the room once timer has run out
+  useEffect(() => {
+    // Delete the room once timer has run out
     if (token && roomRef.current) {
       const timer = setTimeout(() => {
         if (roomRef.current) {
@@ -57,7 +58,7 @@ export default function Page() {
       style={{ height: "100dvh" }}
       ref={roomRef}
     >
-      <ConferenceRoom participantLimit={maxParticipants}/>
+      <ConferenceRoom participantLimit={maxParticipants} />
       <CountdownTimer duration={roomDuration} />
     </LiveKitRoom>
   );
