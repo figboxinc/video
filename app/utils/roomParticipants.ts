@@ -9,5 +9,5 @@ export const removeParticipant = (participantId: string) => {
 };
 
 export const getParticipantCount = () => {
-  return roomParticipants.size;
+  return Array.from(roomParticipants);
 };
