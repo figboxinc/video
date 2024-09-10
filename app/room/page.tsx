@@ -1,7 +1,7 @@
 // Uses useRemoteParticipants hook to count participants and decide what to render
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { LiveKitRoom, useParticipants } from "@livekit/components-react";
+import { LiveKitRoom } from "@livekit/components-react";
 import { useSearchParams } from "next/navigation"
 import "@livekit/components-styles";
 import ConferenceRoom from "../ConferenceRoom";
@@ -11,9 +11,10 @@ import Countdown from "../Countdown";
 export default function Page() {
   const [token, setToken] = useState("");
   const [roomDuration, setRoomDuration] = useState(30 * 60); // 30
-  const [maxParticipants, setMaxParticipants] = useState(4); // Max number of participants allowed
+  const [maxParticipants, setMaxParticipants] = useState(2); // Max number of participants allowed
   const roomRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
+  
   
 
   useEffect(() => {
