@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Install all dependencies and run 
+Install all dependencies
 
 ```bash
 npm install
