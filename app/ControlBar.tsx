@@ -1,14 +1,11 @@
-import { useState } from "react";
 import {
   DisconnectButton,
   TrackToggle,
   MediaDeviceMenu,
 } from "@livekit/components-react";
-import { supportsScreenSharing } from "@livekit/components-core";
 import { Track } from "livekit-client";
+
 export default function ControlBar() {
-  const browserSupportsScreenSharing = supportsScreenSharing();
-  const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
   return (
     <div className="flex justify-around absolute z-50 bottom-0 left-1/2 -translate-x-1/2 bg-gray-700 bg-opacity-60 backdrop-blur-lg  rounded-t-xl border border-slate-900 border-b-0 p-3 space-x-8">
       <MediaDeviceMenu>
