@@ -6,12 +6,16 @@ import { useRemoteParticipants,
   useTracks,
   GridLayout, 
   ParticipantTile,
+  VideoConference,
   ParticipantName,
-  ParticipantLoop } from "@livekit/components-react";
+  ParticipantLoop, 
+  RoomAudioRenderer
+  } from "@livekit/components-react";
 import { useEffect, useState, useRef } from "react";
 import {Track} from 'livekit-client';
 import ControlBar from "./ControlBar";
 import { useRouter } from "next/navigation";
+import { Room } from "livekit-server-sdk";
 
 export default function MyVideoConference(props: any) {
   const remoteParticipants = useRemoteParticipants();
@@ -22,7 +26,7 @@ export default function MyVideoConference(props: any) {
   const [localID, setLocalID] = useState<string>('null');
   const r = useRouter();
  
-  useEffect(() => { // Once room is full, last user to join now sees "room is full", BUT his tracks still get published to room. TODO: Stop tracks from publishing.
+  useEffect(() => { // Once room is full, 
     const all = allParticipants.length; // Everyone in room
     console.log("all participants", all);
     if (all <= maxParticipants) { // If everyone in room is less than limit
@@ -60,6 +64,7 @@ export default function MyVideoConference(props: any) {
     }
   })
 
+
   return (
     <>
       
@@ -69,9 +74,12 @@ export default function MyVideoConference(props: any) {
       
     </GridLayout>
     <ConnectionStateToast />
+    <RoomAudioRenderer />
     <ControlBar/>
+    
         </>
       
     
   );
 }
+

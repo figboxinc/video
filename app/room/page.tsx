@@ -11,10 +11,9 @@ import Countdown from "../Countdown";
 export default function Page() {
   const [token, setToken] = useState("");
   const [roomDuration, setRoomDuration] = useState(30 * 60); // 30
-  const [maxParticipants, setMaxParticipants] = useState(2); // Max number of participants allowed
+  const [maxParticipants, setMaxParticipants] = useState(4); // Max number of participants allowed
   const roomRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
-  
   
 
   useEffect(() => {
