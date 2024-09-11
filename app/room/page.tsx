@@ -38,7 +38,7 @@ export default function Page() {
       data-lk-theme="default"
       style={{ height: "100dvh" }}
       ref={roomRef}
-    ><Countdown duration={roomDuration} />
+    ><Countdown  duration={roomDuration} />
       <ConferenceRoom participantLimit={maxParticipants} />
      
     </LiveKitRoom>

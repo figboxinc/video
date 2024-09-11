@@ -1,5 +1,13 @@
 // app/ConferenceRoom.tsx
-import { useRemoteParticipants, useParticipants, useDataChannel, useRoomContext, useTracks, GridLayout, ParticipantTile } from "@livekit/components-react";
+import { useRemoteParticipants,
+  useParticipants,
+  ConnectionStateToast,
+  useRoomContext,
+  useTracks,
+  GridLayout, 
+  ParticipantTile,
+  ParticipantName,
+  ParticipantLoop } from "@livekit/components-react";
 import { useEffect, useState, useRef } from "react";
 import {Track} from 'livekit-client';
 import ControlBar from "./ControlBar";
@@ -9,11 +17,11 @@ export default function MyVideoConference(props: any) {
   const remoteParticipants = useRemoteParticipants();
   const allParticipants = useParticipants();
   const maxParticipants = props.participantLimit;
-  const dataChan = useDataChannel();
   const room = useRoomContext();
   const participantCountRef = useRef<Set<string>>(new Set());
   const [localID, setLocalID] = useState<string>('null');
   const r = useRouter();
+ 
   useEffect(() => { // Once room is full, last user to join now sees "room is full", BUT his tracks still get published to room. TODO: Stop tracks from publishing.
     const all = allParticipants.length; // Everyone in room
     console.log("all participants", all);
@@ -44,7 +52,7 @@ export default function MyVideoConference(props: any) {
     ],
     { onlySubscribed: false },
   );
-  
+  room.localParticipant // Send remaining time to server
   useEffect(() => {
     if (participantCount > maxParticipants && !isLocalInList) // If room is full AND ID is on list, render full.
     {
@@ -57,8 +65,10 @@ export default function MyVideoConference(props: any) {
       
         <GridLayout tracks={tracks} style={{ height: 'calc(100vh)' }}>
       
-      <ParticipantTile />
+      <ParticipantTile/>
+      
     </GridLayout>
+    <ConnectionStateToast />
     <ControlBar/>
         </>
       

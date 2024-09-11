@@ -21,7 +21,8 @@ export default function Countdown(props: any) {
   const [roomDuration, setRoomDuration] = useState(props.duration);
   const dataChan = useDataChannel();
   const room = useRoomContext();
-
+  const [remainingTime, setRemainingTime] = useState(roomDuration);
+ 
   useEffect(() => {
     const others = remoteParticipants.length;
     if (others >= 1) {
@@ -29,23 +30,12 @@ export default function Countdown(props: any) {
     } else {
       setShouldStart(false);
     }
-    room.on("participantConnected", (participant) => {
-      console.log("participant connected!!", participant);
-      
-    });
-  }, [remoteParticipants]);
-
-  useEffect(() => {
-    const handleDataReceived = (data: any) => {
-      if (data.roomDuration) {
-        setRoomDuration(data.roomDuration);
-      }
-    };
-  },[dataChan])
+  })
 
   useEffect(() => {
     setRoomDuration(props.duration);
   },[props.duration]);
+
   return (
     <span className="font-bold rounded-full bg-gradient-radial from-slate-900  to-transparent text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
       <CountdownCircleTimer
